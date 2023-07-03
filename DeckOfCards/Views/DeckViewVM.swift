@@ -9,9 +9,11 @@ import SwiftUI
 
 class DeckViewVM: ObservableObject {
     // MARK: Properties
+    /// Array of cards and status of the interface
     @Published var deckCollection: [Card] = deck
     @Published var cardPosition: Int = 1
     @Published var deckIsDisabled: Bool = false
+    @Published var deckIsEmpty: Bool = false
     
     /// Deck animation properties
     @Published var horizontalOffset: CGFloat = 0
@@ -22,7 +24,7 @@ class DeckViewVM: ObservableObject {
     @Published var extraOffset: Double = 0
     
     // MARK: Methods
-    /// Animation functions
+    /// Animation gestures
     func onChanged(value: DragGesture.Value) {
         horizontalOffset =
             value.translation.width > 150 ? 150 :
@@ -66,8 +68,6 @@ class DeckViewVM: ObservableObject {
                     withAnimation(.easeIn(duration: 0.1)) {
                         self.deckCollection.remove(at: 0)
                         self.deckCollection.append(firstCard)
-                        /// Updates displayed card position
-                        self.updateCardPosition()
                         /// Remove the card from the deck
                         self.removeFromDeck(
                             index: self.indexOf(card: firstCard)
@@ -157,13 +157,29 @@ class DeckViewVM: ObservableObject {
         }
     }
     
+    /// Remove blur effect
+    func removeBlur() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            withAnimation() {
+                self.deckIsEmpty = false
+            }
+        }
+    }
+    
     /// Remove the card from the deck after swiping up
     func removeFromDeck(index: Int) {
         deckCollection.remove(at: index)
         
         if deckCollection.isEmpty {
+            withAnimation() {
+                deckIsEmpty = true
+            }
             /// Populate the deck again
             deckCollection = deck.shuffled()
+            removeBlur()
+            cardPosition = 1
+        } else {
+            updateCardPosition()
         }
     }
 }

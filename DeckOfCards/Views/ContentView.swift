@@ -16,6 +16,7 @@ struct ContentView: View {
                 Spacer()
                 DeckView()
                     .frame(height: geo.size.height * 0.5)
+                    .blur(radius: deckVVM.deckIsEmpty ? 25 : 0)
                     .environmentObject(deckVVM)
             }
         }
