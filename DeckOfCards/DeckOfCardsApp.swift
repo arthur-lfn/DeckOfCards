@@ -2,7 +2,7 @@
 //  DeckOfCardsApp.swift
 //  DeckOfCards
 //
-//  Created by Arturo Alfani on 03/07/23.
+//  Created by Arturo Alfani on 03/06/23.
 //
 
 import SwiftUI
