@@ -26,8 +26,11 @@ struct CardView: View {
                     Text("\(card.color) Card")
                         .font(.title)
                     Spacer()
-                    Text("Swipe up, left or right")
-                        .font(.caption)
+                    VStack(alignment: .leading) {
+                        Text("Swipe left or right to show next card")
+                        Text("Swipe up to eliminate card")
+                    }
+                    .font(.caption2)
                 }
                 .foregroundColor(Color(.white))
                 Spacer()

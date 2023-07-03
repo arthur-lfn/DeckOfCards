@@ -42,13 +42,13 @@ class DeckViewVM: ObservableObject {
         if translation < -100 && (value.translation.width > -100 && value.translation.width < 100) {
             deckIsDisabled = true
             
-            withAnimation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0.6)) {
+            withAnimation(.spring(response: 0.5, dampingFraction: 0.6)) {
                 extraOffset = -200
                 cardScale = 0.5
             }
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                withAnimation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0.6)) {
+                withAnimation(.spring(response: 0.5, dampingFraction: 0.6)) {
                     self.zIndexValue = -1
                     self.extraOffset = 0
                     self.horizontalOffset = .zero
@@ -77,7 +77,7 @@ class DeckViewVM: ObservableObject {
                 }
             }
         } else {
-            withAnimation(.spring(response: 0.5, dampingFraction: 0.5, blendDuration: 0.7)) {
+            withAnimation(.spring(response: 0.5, dampingFraction: 0.5)) {
                 verticalOffset = .zero
             }
         }
@@ -89,7 +89,7 @@ class DeckViewVM: ObservableObject {
         if (translation > 100 || translation < -100) && value.translation.height > -100 {
             deckIsDisabled = true
             
-            withAnimation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0.6)) {
+            withAnimation(.spring(response: 0.5, dampingFraction: 0.6)) {
                 extraOffset = -250
                 cardScale = 0.3
                 
@@ -101,7 +101,7 @@ class DeckViewVM: ObservableObject {
             }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                withAnimation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0.6)) {
+                withAnimation(.spring(response: 0.5, dampingFraction: 0.6)) {
                     self.zIndexValue = -1
                     self.extraOffset = 0
                     self.horizontalOffset = .zero
@@ -132,7 +132,7 @@ class DeckViewVM: ObservableObject {
                 self.deckIsDisabled = false
             }
         } else {
-            withAnimation(.spring(response: 0.5, dampingFraction: 0.5, blendDuration: 0.7)) {
+            withAnimation(.spring(response: 0.5, dampingFraction: 0.5)) {
                 horizontalOffset = .zero
             }
         }
